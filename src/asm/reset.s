@@ -10,14 +10,15 @@ extern nesbin_reset
 handle_reset:
 	; Disable IRQs and decimal mode.
 	sei
-	
-	; Clear some variables and flags.
 	cld
+	
+	; Clear some flags and registers.
 	clc
 	clv
 	lda	#$00
 	tax
 	tay
+	txs
 	
 	; Clear NES' internal RAM.
 	rs_clr_int_ram:
@@ -36,5 +37,5 @@ handle_reset:
 	
 	; [TODO] Add PPU and APU initialization code.
 	
-	; Jump to C function "nesbin_reset".
-	jmp nesbin_reset
+	; Jump to C function "_nesbin_reset".
+	jmp _nesbin_reset
